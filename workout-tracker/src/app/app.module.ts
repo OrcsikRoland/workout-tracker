@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { WorkoutSessionListComponent } from './pages/workout-session-list/workout-session-list.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 
 
@@ -12,6 +15,9 @@ import { WorkoutSessionListComponent } from './pages/workout-session-list/workou
   declarations: [
     AppComponent,
     WorkoutSessionListComponent,
+    HomeComponent,
+    NavbarComponent,
+    FooterComponent,
     
   ],
   imports: [
