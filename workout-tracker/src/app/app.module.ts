@@ -8,6 +8,8 @@ import { WorkoutSessionListComponent } from './pages/workout-session-list/workou
 import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { WorkoutSessionFormComponent } from './pages/workout-session-form/workout-session-form.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -18,12 +20,14 @@ import { FooterComponent } from './shared/footer/footer.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
+    WorkoutSessionFormComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

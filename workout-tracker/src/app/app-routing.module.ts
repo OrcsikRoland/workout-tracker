@@ -7,7 +7,7 @@ import { WorkoutSessionFormComponent } from './pages/workout-session-form/workou
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'sessions', component: WorkoutSessionListComponent },
-  { path: 'session/new', component: WorkoutSessionFormComponent},
+  { path: 'sessions/new', component: WorkoutSessionFormComponent},
 ];
 
 @NgModule({

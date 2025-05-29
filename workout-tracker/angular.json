@@ -36,7 +36,9 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+                , "output": "assets"
+              },
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss"
