@@ -14,10 +14,9 @@ export class WorkoutSessionFormComponent {
 
   constructor(private sessionService: WorkoutSessionService, private router: Router){}
 
-  save(): void{
-    this.sessionService.create(this.sessions).subscribe(() => {
-      this.router.navigate(['/sessions'])
-    })
+  save(): void {
+    this.sessionService.create(this.sessions);
+    this.router.navigate(['/sessions']);
   }
 
 }

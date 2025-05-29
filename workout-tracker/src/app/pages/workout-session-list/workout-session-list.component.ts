@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkoutSession } from '../../models/workout-session';
 import { WorkoutSessionService } from '../../services/workout-session.service';
+import { WorkoutTypeService } from '../../services/workout-type.service';
+import { WorkoutType } from '../../models/workout-type';
 
 
 @Component({
@@ -12,22 +14,22 @@ import { WorkoutSessionService } from '../../services/workout-session.service';
 export class WorkoutSessionListComponent implements OnInit {
   
   sessions: WorkoutSession[] = [];
-  
+  workoutTypes: WorkerType[] = []
 
-  constructor(private sesssionService: WorkoutSessionService) {}
+  constructor(
+    private sesssionService: WorkoutSessionService,
+    private workoutTypeService: WorkoutTypeService
+  ) {}
   
   
   ngOnInit(): void {
-    this.sesssionService.getAll().subscribe(data => {
-      this.sessions = data;
-
-      
-    })
+    this.sessions = this.sesssionService.getAll();
   }
   
   
+}
 
   
 
-}
+
   
