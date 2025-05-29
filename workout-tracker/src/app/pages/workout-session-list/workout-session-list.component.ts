@@ -14,7 +14,7 @@ import { WorkoutType } from '../../models/workout-type';
 export class WorkoutSessionListComponent implements OnInit {
   
   sessions: WorkoutSession[] = [];
-  workoutTypes: WorkerType[] = []
+  workoutTypes: WorkoutType[] = [];
 
   constructor(
     private sesssionService: WorkoutSessionService,
@@ -24,10 +24,15 @@ export class WorkoutSessionListComponent implements OnInit {
   
   ngOnInit(): void {
     this.sessions = this.sesssionService.getAll();
+    this.workoutTypes = this.workoutTypeService.getAll();
   }
-  
-  
+
+  getWorkoutTypeName(id: number): string {
+  return this.workoutTypeService.getNameById(id);
 }
+}
+  
+
 
   
 
