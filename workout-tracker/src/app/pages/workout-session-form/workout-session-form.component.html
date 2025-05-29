@@ -1,32 +1,35 @@
 <div class="container mt-4">
-  <h2>Új edzés rögzítése</h2>
+  <h2>New Session</h2>
 
   <form (ngSubmit)="save()" #formRef="ngForm">
     <div class="mb-3">
-      <label for="date" class="form-label">Dátum</label>
+      <label for="date" class="form-label">Date</label>
       <input type="date" id="date" class="form-control" required [(ngModel)]="sessions.date" name="date">
     </div>
 
     <div class="mb-3">
-      <label for="type" class="form-label">Edzéstípus ID</label>
-      <input type="number" id="type" class="form-control" required [(ngModel)]="sessions.workoutTypeId" name="type">
+      <label for="workoutType" class="form-label">Workout Type</label>
+      <select class="form-select" id="workoutType" [(ngModel)]="sessions.workoutTypeId" name="workoutTypeId" required>
+        <option [ngValue]="null" disabled selected>-- Válassz típust --</option>
+        <option *ngFor="let type of workoutTypes" [ngValue]="type.id">{{ type.name }}</option>
+      </select>
     </div>
 
     <div class="mb-3">
-      <label for="duration" class="form-label">Időtartam (perc)</label>
+      <label for="duration" class="form-label">Duratin (min)</label>
       <input type="number" id="duration" class="form-control" required [(ngModel)]="sessions.durationMinutes" name="duration">
     </div>
 
     <div class="mb-3">
-      <label for="calories" class="form-label">Kalória</label>
+      <label for="calories" class="form-label">Calorie</label>
       <input type="number" id="calories" class="form-control" required [(ngModel)]="sessions.caloriesBurned" name="calories">
     </div>
 
     <div class="mb-3">
-      <label for="notes" class="form-label">Megjegyzés</label>
+      <label for="notes" class="form-label">Notes</label>
       <textarea id="notes" class="form-control" [(ngModel)]="sessions.notes" name="notes"></textarea>
     </div>
 
-    <button class="btn btn-primary" type="submit" [disabled]="formRef.invalid">Mentés</button>
+    <button class="btn btn-primary " type="submit" [disabled]="formRef.invalid">Save</button>
   </form>
 </div>
