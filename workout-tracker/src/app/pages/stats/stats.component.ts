@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { WorkoutSessionService } from '../../services/workout-session.service';
+import { WorkoutTypeService } from '../../services/workout-type.service';
+import { WorkoutType } from '../../models/workout-type';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-stats',
@@ -6,6 +10,28 @@ import { Component } from '@angular/core';
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.scss'
 })
-export class StatsComponent {
+export class StatsComponent implements OnInit {
+  
+  stats: { name: string; count: number }[] = [];
+
+  constructor(
+    private sessionService: WorkoutSessionService,
+    private workoutTypeService: WorkoutTypeService
+  ) {}
+
+  ngOnInit(): void {
+    const sessions = this.sessionService.getAll();
+    const workoutTypes = this.workoutTypeService.getAll();
+
+    const typeCount: { [key: number]: number } = {};
+    for (const session of sessions) {
+      typeCount[session.workoutTypeId] = (typeCount[session.workoutTypeId] || 0) + 1;
+    }
+
+    this.stats = Object.entries(typeCount).map(([id, count]) => {
+      const typeName = workoutTypes.find(t => t.id === +id)?.name ?? 'Unknown';
+      return { name: typeName, count };
+    });
+  }
 
 }
