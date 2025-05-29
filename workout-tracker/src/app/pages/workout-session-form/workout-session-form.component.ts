@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { WorkoutTypeService } from '../../services/workout-type.service';
 import { WorkoutType } from '../../models/workout-type';
 
-
 @Component({
   selector: 'app-workout-session-form',
   standalone: false,

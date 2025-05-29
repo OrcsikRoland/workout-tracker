@@ -13,6 +13,8 @@
           <p class="card-text mb-1"><strong>Duration:</strong> {{ session.durationMinutes }} Min</p>
           <p class="card-text mb-1"><strong>Calorie:</strong> {{ session.caloriesBurned }} Cal</p>
           <p class="card-text"><strong>Notes:</strong> {{ session.notes }}</p>
+          <button class="btn btn-sm btn-primary me-2" (click)="editSession(session.id)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteSession(session.id)">Delete</button>
         </div>
       </div>
     </div>

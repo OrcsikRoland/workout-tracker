@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'sessions', component: WorkoutSessionListComponent },
   { path: 'sessions/new', component: WorkoutSessionFormComponent},
+  { path: 'session/edit/:id', component: WorkoutSessionFormComponent}
 ];
 
 @NgModule({

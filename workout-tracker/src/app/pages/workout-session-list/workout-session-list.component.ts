@@ -3,6 +3,7 @@ import { WorkoutSession } from '../../models/workout-session';
 import { WorkoutSessionService } from '../../services/workout-session.service';
 import { WorkoutTypeService } from '../../services/workout-type.service';
 import { WorkoutType } from '../../models/workout-type';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class WorkoutSessionListComponent implements OnInit {
 
   constructor(
     private sesssionService: WorkoutSessionService,
-    private workoutTypeService: WorkoutTypeService
+    private workoutTypeService: WorkoutTypeService,
+    private router: Router
   ) {}
   
   
@@ -29,7 +31,19 @@ export class WorkoutSessionListComponent implements OnInit {
 
   getWorkoutTypeName(id: number): string {
   return this.workoutTypeService.getNameById(id);
-}
+  }
+
+  editSession(id: number): void {
+  this.router.navigate(['/sessions/edit', id]);
+  }
+
+  deleteSession(id: number): void {
+    this.sesssionService.delete(id);
+    this.sessions = this.sesssionService.getAll(); 
+  }
+
+
+
 }
   
 
