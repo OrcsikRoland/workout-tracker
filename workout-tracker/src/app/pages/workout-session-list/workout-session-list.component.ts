@@ -30,7 +30,8 @@ export class WorkoutSessionListComponent implements OnInit {
   }
 
   getWorkoutTypeName(id: number): string {
-  return this.workoutTypeService.getNameById(id);
+    let type = this.workoutTypes.find(t => t.id === id)
+    return type ? type.name :'ismeretlen' 
   }
 
   editSession(id: number): void {

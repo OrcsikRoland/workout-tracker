@@ -8,18 +8,52 @@ import { HttpClient } from '@angular/common/http';
 })
 export class WorkoutTypeService {
 
-  private workoutTypes: WorkoutType[] = [
-    { id: 1, name: 'Cardio' },
-    { id: 2, name: 'Strength' },
-    { id: 3, name: 'Yoga' },
-    { id: 4, name: 'HIIT' }
-  ];
+  private storageKey = 'workoutTypes';
 
-  getAll(): WorkoutType[] {
-    return this.workoutTypes;
+  constructor() {
+    this.seedDefaults(); // csak egyszeri feltöltés
   }
 
-  getNameById(id: number): string {
-    return this.workoutTypes.find(t => t.id === id)?.name || 'Ismeretlen';
+  private seedDefaults(): void {
+    if (!localStorage.getItem(this.storageKey)) {
+      const defaultTypes: WorkoutType[] = [
+        { id: 1, name: 'Cardio' },
+        { id: 2, name: 'Strength' },
+        { id: 3, name: 'Yoga' },
+        { id: 4, name: 'HIIT' },
+      ];
+      localStorage.setItem(this.storageKey, JSON.stringify(defaultTypes));
+    }
+  }
+
+  getAll(): WorkoutType[] {
+    const data = localStorage.getItem(this.storageKey);
+    return data ? JSON.parse(data) : [];
+  }
+
+  getById(id: number): WorkoutType | undefined {
+    return this.getAll().find(t => t.id === id);
+  }
+
+  create(type: WorkoutType): void {
+    const types = this.getAll();
+    const newId = types.length > 0 ? Math.max(...types.map(t => t.id ?? 0)) + 1 : 1;
+    type.id = newId;
+    types.push(type);
+    this.save(types);
+  }
+
+  update(id: number, updated: WorkoutType): void {
+    const types = this.getAll().map(t => t.id === id ? updated : t);
+    this.save(types);
+  }
+
+  delete(id: number): void {
+    const types = this.getAll().filter(t => t.id !== id);
+    this.save(types);
+  }
+
+  private save(types: WorkoutType[]): void {
+    localStorage.setItem(this.storageKey, JSON.stringify(types));
   }
 }

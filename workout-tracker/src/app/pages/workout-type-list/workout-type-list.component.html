@@ -1,0 +1,39 @@
+<div class="container py-4 animate-slide-up">
+  <h2 >Workout Types Update</h2>
+
+  <table class="table table-bordered table-striped my-4">
+    <thead>
+      <tr>
+        
+        <th>Name</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of types">
+        
+        <td>{{ t.name }}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(t)">Edit</button>
+          <button class="btn btn-sm btn-outline-danger" (click)="delete(t.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form (ngSubmit)="save()" #typeForm="ngForm">
+    <div class="input-group mb-3">
+      <input
+        class="form-control"
+        type="text"
+        [(ngModel)]="type.name"
+        name="name"
+        required
+        placeholder="Types name"
+      />
+      <button class="btn btn-success" type="submit">
+        {{ type.id ? 'Save' : 'Add' }}
+      </button>
+    </div>
+  </form>
+</div>

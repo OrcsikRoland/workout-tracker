@@ -10,6 +10,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { WorkoutSessionFormComponent } from './pages/workout-session-form/workout-session-form.component';
 import { FormsModule } from '@angular/forms';
+import { WorkoutTypeListComponent } from './pages/workout-type-list/workout-type-list.component';
 
 
 
@@ -22,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     FooterComponent,
     WorkoutSessionFormComponent,
+    WorkoutTypeListComponent,
     
   ],
   imports: [
