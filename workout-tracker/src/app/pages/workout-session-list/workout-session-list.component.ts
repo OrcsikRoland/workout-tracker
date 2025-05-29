@@ -12,6 +12,7 @@ import { WorkoutSessionService } from '../../services/workout-session.service';
 export class WorkoutSessionListComponent implements OnInit {
   
   sessions: WorkoutSession[] = [];
+  
 
   constructor(private sesssionService: WorkoutSessionService) {}
   
@@ -19,6 +20,8 @@ export class WorkoutSessionListComponent implements OnInit {
   ngOnInit(): void {
     this.sesssionService.getAll().subscribe(data => {
       this.sessions = data;
+
+      
     })
   }
   

@@ -8,7 +8,7 @@ import { WorkoutSession } from '../models/workout-session';
 })
 export class WorkoutSessionService {
 
-  private apiUrl = 'https://localhost:7077/api/workoutsession';
+  private apiUrl = 'https://localhost:7077/api/WorkoutSession';
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<WorkoutSession[]> {

@@ -1,25 +1,19 @@
-<div class="container mt-4">
-  <h2>Edzésnapló</h2>
+<div class="container my-5">
+  <h2 class="mb-4 text-center">Edzésnapló</h2>
 
-  <table class="table table-striped table-bordered mt-3">
-    <thead class="table-dark">
-      <tr>
-        <th>Dátum</th>
-        <th>Edzéstípus ID</th>
-        <th>Időtartam (perc)</th>
-        <th>Kalória</th>
-        <th>Megjegyzés</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let s of sessions">
-        <td>{{ s.date | date: 'yyyy.MM.dd' }}</td>
-        <td>{{ s.workoutTypeId }}</td>
-        <td>{{ s.durationMinutes }}</td>
-        <td>{{ s.caloriesBurned }}</td>
-        <td>{{ s.notes || '-' }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let session of sessions">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-primary fw-bold">
+            {{ session.workoutTypeId === 1 ? 'Cardio' : 'Other' }}
+          </h5>
+          <p class="card-text mb-1"><strong>Dátum:</strong> {{ session.date | date }}</p>
+          <p class="card-text mb-1"><strong>Időtartam:</strong> {{ session.durationMinutes }} perc</p>
+          <p class="card-text mb-1"><strong>Kalória:</strong> {{ session.caloriesBurned }} kcal</p>
+          <p class="card-text"><strong>Megjegyzés:</strong> {{ session.notes }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
