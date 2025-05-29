@@ -12,7 +12,7 @@ export class WorkoutSessionService {
 
   constructor() {}
   getAll(): WorkoutSession[] {
-    const data = localStorage.getItem(this.storagekey);
+    let data = localStorage.getItem(this.storagekey);
     return data? JSON.parse(data) : [];
   }
   getById(id: number): WorkoutSession | undefined {

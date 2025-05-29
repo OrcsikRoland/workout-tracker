@@ -23,7 +23,7 @@ export class WorkoutSessionListComponent implements OnInit {
   
   
   ngOnInit(): void {
-    this.sessions = this.sesssionService.getAll();
+    this.sessions = this.sesssionService.getAll().sort((a, b) => b.id - a.id);
     this.workoutTypes = this.workoutTypeService.getAll();
   }
 

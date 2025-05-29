@@ -1,8 +1,8 @@
 export class WorkoutSession {
-    id: number = 0;
+    id: number = 0; 
     date: string = '';
     workoutTypeId: number = 0;
-    durationMinutes: number = 0;
-    caloriesBurned: number = 0;
+    durationMinutes: number | null = null;
+    caloriesBurned: number | null = null;
     notes?: string; 
 }
