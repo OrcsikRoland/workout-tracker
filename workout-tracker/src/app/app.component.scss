@@ -1,0 +1,8 @@
+$white: #ffffff;
+$gray1: #f8f9fa;
+$gray2: #e9ecef;
+$gray3: #dee2e6;
+
+body {
+  background: linear-gradient(to bottom right, $white, $gray1, $gray2, $gray3);
+}

@@ -35,12 +35,17 @@ export class WorkoutSessionListComponent implements OnInit {
   }
 
   editSession(id: number): void {
-  this.router.navigate(['/sessions/edit', id]);
+    this.router.navigate(['/sessions/edit', id]);
   }
 
   deleteSession(id: number): void {
-    this.sesssionService.delete(id);
-    this.sessions = this.sesssionService.getAll(); 
+    const confirmDelete = confirm('Are you sure you want to delete this workout session?')
+    if (confirmDelete) {
+      this.sesssionService.delete(id);
+      this.sessions = this.sesssionService.getAll(); 
+    }
+
+
   }
 
 

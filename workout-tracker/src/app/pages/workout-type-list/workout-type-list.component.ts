@@ -42,7 +42,7 @@ export class WorkoutTypeListComponent implements OnInit{
   }
 
   delete(id: number): void {
-    if (confirm('Biztosan törlöd ezt a típust?')) {
+    if (confirm('Are you sure you want to delete this type?')) {
       this.typeService.delete(id);
       this.refreshList();
     }

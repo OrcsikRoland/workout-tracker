@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'sessions', component: WorkoutSessionListComponent },
   { path: 'sessions/new', component: WorkoutSessionFormComponent},
-  { path: 'session/edit/:id', component: WorkoutSessionFormComponent},
+  { path: 'sessions/edit/:id', component: WorkoutSessionFormComponent},
   { path: 'types', component: WorkoutTypeListComponent}
 ];
 
