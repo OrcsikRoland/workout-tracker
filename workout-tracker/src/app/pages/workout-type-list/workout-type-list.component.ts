@@ -20,7 +20,10 @@ export class WorkoutTypeListComponent implements OnInit{
   }
 
   refreshList(): void {
-    this.types = this.typeService.getAll();
+    this.typeService.getAll().subscribe({
+      next: (data) => this.types = data,
+      error: (err) => console.error(err)
+    })
   }
 
 
@@ -28,23 +31,30 @@ export class WorkoutTypeListComponent implements OnInit{
     if (this.type.name.trim() === '') return;
 
     if (this.type.id) {
-      this.typeService.update(this.type.id, this.type);
+      this.typeService.update(this.type.id, this.type).subscribe({
+        next: () => {
+          this.type = new WorkoutType();
+          this.refreshList();
+        },
+        error: (err) => console.error(err)
+      });
     } else {
-      this.typeService.create(this.type);
+      this.typeService.create(this.type).subscribe({
+        next: () => {
+          this.type = new WorkoutType();
+          this.refreshList();
+        },
+        error: (err) => console.error(err)
+      });
     }
-
-    this.type = new WorkoutType();
-    this.refreshList();
-  }
-
-  edit(t: WorkoutType): void {
-    this.type = { ...t };
   }
 
   delete(id: number): void {
     if (confirm('Are you sure you want to delete this type?')) {
-      this.typeService.delete(id);
-      this.refreshList();
+      this.typeService.delete(id).subscribe({
+        next: () => this.refreshList(),
+        error: (err) => console.error(err)
+      });
     }
   }
 
