@@ -19,18 +19,30 @@ export class StatsComponent implements OnInit {
     private workoutTypeService: WorkoutTypeService
   ) {}
 
+
+
   ngOnInit(): void {
-    const sessions = this.sessionService.getAll();
-    const workoutTypes = this.workoutTypeService.getAll();
+    this.loadData();
+  }
 
-    const typeCount: { [key: number]: number } = {};
-    for (const session of sessions) {
-      typeCount[session.workoutTypeId] = (typeCount[session.workoutTypeId] || 0) + 1;
-    }
-
-    this.stats = Object.entries(typeCount).map(([id, count]) => {
-      const typeName = workoutTypes.find(t => t.id === +id)?.name ?? 'Unknown';
-      return { name: typeName, count };
+  loadData(): void {
+    this.sessionService.getAll().subscribe({
+      next: (sessions) => {
+        this.workoutTypeService.getAll().subscribe({
+          next: (workoutTypes) => {
+            const typeCount: { [key: number]: number } = {};
+            for (const session of sessions) {
+              typeCount[session.workoutTypeId] = (typeCount[session.workoutTypeId] || 0) + 1;
+            }
+            this.stats = Object.entries(typeCount).map(([id, count]) => {
+              const typeName = workoutTypes.find(t => t.id === +id)?.name ?? 'Unknown';
+              return { name: typeName, count };
+            });
+          },
+          error: (err) => console.error(err)
+        });
+      },
+      error: (err) => console.error(err)
     });
   }
 

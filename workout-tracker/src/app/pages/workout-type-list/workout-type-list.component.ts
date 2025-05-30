@@ -48,6 +48,9 @@ export class WorkoutTypeListComponent implements OnInit{
       });
     }
   }
+  edit(t: WorkoutType): void {
+    this.type = { ...t };
+  }
 
   delete(id: number): void {
     if (confirm('Are you sure you want to delete this type?')) {
