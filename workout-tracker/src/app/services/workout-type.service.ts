@@ -8,52 +8,27 @@ import { HttpClient } from '@angular/common/http';
 })
 export class WorkoutTypeService {
 
-  private storageKey = 'workoutTypes';
+  private apiUrl = 'https://localhost:7077/api/WorkoutType'; 
 
-  constructor() {
-    this.seedDefaults(); // csak egyszeri feltöltés
+  constructor(private http: HttpClient) {}
+
+  getAll(): Observable<WorkoutType[]> {
+    return this.http.get<WorkoutType[]>(this.apiUrl);
   }
 
-  private seedDefaults(): void {
-    if (!localStorage.getItem(this.storageKey)) {
-      const defaultTypes: WorkoutType[] = [
-        { id: 1, name: 'Cardio' },
-        { id: 2, name: 'Strength' },
-        { id: 3, name: 'Yoga' },
-        { id: 4, name: 'HIIT' },
-      ];
-      localStorage.setItem(this.storageKey, JSON.stringify(defaultTypes));
-    }
+  getById(id: number): Observable<WorkoutType> {
+    return this.http.get<WorkoutType>(this.apiUrl +'/' + id);
   }
 
-  getAll(): WorkoutType[] {
-    const data = localStorage.getItem(this.storageKey);
-    return data ? JSON.parse(data) : [];
+  create(type: WorkoutType): Observable<WorkoutType> {
+    return this.http.post<WorkoutType>(this.apiUrl, type);
   }
 
-  getById(id: number): WorkoutType | undefined {
-    return this.getAll().find(t => t.id === id);
+  update(id: number, type: WorkoutType): Observable<void> {
+    return this.http.put<void>(this.apiUrl +'/' + id, type);
   }
 
-  create(type: WorkoutType): void {
-    const types = this.getAll();
-    const newId = types.length > 0 ? Math.max(...types.map(t => t.id ?? 0)) + 1 : 1;
-    type.id = newId;
-    types.push(type);
-    this.save(types);
-  }
-
-  update(id: number, updated: WorkoutType): void {
-    const types = this.getAll().map(t => t.id === id ? updated : t);
-    this.save(types);
-  }
-
-  delete(id: number): void {
-    const types = this.getAll().filter(t => t.id !== id);
-    this.save(types);
-  }
-
-  private save(types: WorkoutType[]): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(types));
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(this.apiUrl +'/' + id);
   }
 }

@@ -8,34 +8,26 @@ import { WorkoutSession } from '../models/workout-session';
 })
 export class WorkoutSessionService {
 
-  private storagekey = 'workoutSessions'
+  private apiUrl = 'https://localhost:7077/api/WorkoutSession';
 
-  constructor() {}
-  getAll(): WorkoutSession[] {
-    let data = localStorage.getItem(this.storagekey);
-    return data? JSON.parse(data) : [];
-  }
-  getById(id: number): WorkoutSession | undefined {
-    return this.getAll().find(s => s.id === id);
+  constructor(private http: HttpClient) {}
+
+  getAll(): Observable<WorkoutSession[]> {
+    return this.http.get<WorkoutSession[]>(this.apiUrl)
   }
 
-  create(session: WorkoutSession): void {
-    const sessions = this.getAll();
-    const newId = sessions.length > 0 ? Math.max(...sessions.map(s => s.id)) + 1 : 1;
-    session.id = newId;
-    sessions.push(session);
-    localStorage.setItem(this.storagekey, JSON.stringify(sessions));
+  getById(id: number): Observable<WorkoutSession> {
+    return this.http.get<WorkoutSession>(this.apiUrl +'/' + id)
   }
 
-  update(id: number, updated: WorkoutSession): void {
-    const sessions = this.getAll().map(s => (s.id === id ? updated : s));
-    localStorage.setItem(this.storagekey, JSON.stringify(sessions));
+  create(session: WorkoutSession): Observable<WorkoutSession> {
+    return this.http.post<WorkoutSession>(this.apiUrl, session);
   }
 
-  delete(id: number): void {
-    const sessions = this.getAll().filter(s => s.id !== id);
-    localStorage.setItem(this.storagekey, JSON.stringify(sessions));
+  update(id: number, session: WorkoutSession): Observable<void> {
+    return this.http.put<void>(this.apiUrl +'/' + id, session);
   }
-
-  
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(this.apiUrl +'/' + id);
+  }
 }
