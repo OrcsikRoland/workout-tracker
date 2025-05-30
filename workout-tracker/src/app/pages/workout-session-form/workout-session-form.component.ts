@@ -25,24 +25,39 @@ export class WorkoutSessionFormComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.workoutTypes = this.workoutTypeService.getAll();
-    let idParam = this.route.snapshot.paramMap.get('id');
+    this.loadWorkoutTypes();
+    const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
       const id = +idParam;
-      const existing = this.sessionService.getById(id);
-      if (existing) {
-        this.sessions = existing;
-      }
+      this.sessionService.getById(id).subscribe({
+        next: (existing) => {
+          this.sessions = existing;
+        },
+        error: (err) => console.error(err)
+      });
     }
   }
+
+  loadWorkoutTypes(): void {
+    this.workoutTypeService.getAll().subscribe({
+      next: (data) => {
+        this.workoutTypes = data;
+      },
+      error: (err) => console.error(err)
+    });
+  } 
 
   save(): void {
     if (this.sessions.id) {
-      this.sessionService.update(this.sessions.id, this.sessions);
+      this.sessionService.update(this.sessions.id, this.sessions).subscribe({
+        next: () => this.router.navigate(['/sessions']),
+        error: (err) => console.error(err)
+      });
     } else {
-      this.sessionService.create(this.sessions);
+      this.sessionService.create(this.sessions).subscribe({
+        next: () => this.router.navigate(['/sessions']),
+        error: (err) => console.error(err)
+      });
     }
-    this.router.navigate(['/sessions']);
   }
-
 }
