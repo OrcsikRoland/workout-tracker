@@ -12,8 +12,7 @@ import { WorkoutSessionFormComponent } from './pages/workout-session-form/workou
 import { FormsModule } from '@angular/forms';
 import { WorkoutTypeListComponent } from './pages/workout-type-list/workout-type-list.component';
 import { StatsComponent } from './pages/stats/stats.component';
-import { CalendarComponent } from './pages/home/calendar/calendar.component';
-import { FullCalendarModule } from '@fullcalendar/angular';
+
 
 
 
@@ -28,7 +27,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     WorkoutSessionFormComponent,
     WorkoutTypeListComponent,
     StatsComponent,
-    CalendarComponent,
+
     
   ],
   imports: [
@@ -36,10 +35,11 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    FullCalendarModule
+   
     
   ],
   providers: [],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }
