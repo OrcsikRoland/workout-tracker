@@ -1,0 +1,15 @@
+.navbar {
+  font-weight: 500;
+
+  .navbar-brand img {
+    max-height: 30px;
+    margin-right: 8px;
+  }
+
+  .nav-link {
+    transition: all 0.3s;
+    &:hover {
+      color: #0d6efd;
+    }
+  }
+}

@@ -3,13 +3,11 @@
     <p class="description">See how your workouts are distributed across different types.</p>
 
     <div class="chart">
-    <div class="bar" *ngFor="let stat of stats">
-        <div class="bar-inner" [style.height]="stat.count * 40 + 'px'" [title]="stat.count + ' sessions'">
-            {{ stat.count }}
+        <div class="bar" *ngFor="let stat of stats">
+            <div class="bar-inner" [style.height]="stat.count * 40 + 'px'" [title]="stat.count + ' sessions'">
+                {{ stat.count }}
+            </div>
+            <div class="bar-label">{{ stat.name }}</div>
         </div>
-        <div class="bar-label">{{ stat.name }}</div>
     </div>
-</div>
-
-
 </div>
