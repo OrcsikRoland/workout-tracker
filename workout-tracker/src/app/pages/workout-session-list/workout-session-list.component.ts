@@ -32,7 +32,12 @@ export class WorkoutSessionListComponent implements OnInit {
   loadSessions(): void {
     this.sessionService.getAll().subscribe({
       next: (data) => {
-        this.sessions = data.sort((a, b) => b.id - a.id);
+        this.sessions = data.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          
+          return dateB.getTime() - dateA.getTime();
+        });
       },
       error: (err) => console.error(err)
     });
